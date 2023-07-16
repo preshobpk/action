@@ -1,5 +1,4 @@
 provider "aws" {
-  region = "ap-south-1"
 }
 variable "proj_name" {
   default = "zomato"
