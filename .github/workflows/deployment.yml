@@ -1,0 +1,39 @@
+on:
+ push:
+    branches:
+       - master
+jobs:
+  terraform:
+     runs-on: ubuntu-latest
+     env:
+       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}    //from prod account ,add it in github repo--setting--secret&varaiable-- 
+       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}                                      actions
+       AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+     steps:
+       - name: Checkout Terraform code
+         uses: actions/checkout@v2
+
+       - name: Terrafor‌m Installation
+         uses: hashicorp/setup-terraform@v2
+         with:
+            terraform_version: 1.4.0
+
+       - name: Terraform fmt
+         run: terraform fmt
+         working-directory: .
+
+       - name: Terraform init
+         run: terraform init
+         working-directory: .
+
+       - name: Terraform validate
+         run: terraform validate
+         working-directory: .
+
+       - name: Terraform plan
+         run: terraform plan
+         working-directory: .
+
+       - name: Terraform apply
+         run: terraform apply --auto-approve
+         working-directory: .
