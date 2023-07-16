@@ -39,7 +39,7 @@ resource "aws_instance" "zomato_server" {
   vpc_security_group_ids = [aws_security_group.zomato-sg.id]
   user_data              = file("userdata.sh")
   tags = {
-    Name    = "${var.proj_name}-${var.proj_env}-server"
+    Name    = "${var.proj_name}-${var.proj_env}-wevserver"
     project = "var.proj_name"
     env     = "var.proj_env"
   }
